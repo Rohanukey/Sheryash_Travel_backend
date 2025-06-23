@@ -31,8 +31,16 @@ const userSchema = new mongoose.Schema({
     date: { type: Date, required: true },           // use Date here for real dates
 }, { timestamps: true });
 
+const userSchema2 = new mongoose.Schema({
+    name: { type: String, required: true },         // name like "Rohan"
+    email: { type: String, required: true },       // pickup location
+    number: { type: String, required: true },  // destination location
+    password: { type: String, required: true },       // mobile number (you can also use Number)
+}, { timestamps: true });
+
 
 const User = mongoose.model("User", userSchema);
+const Userdata = mongoose.model("Userdata", userSchema2);
 
 
 app.get("/", (req, res) => {
@@ -43,6 +51,20 @@ app.get("/", (req, res) => {
 app.post("/api/users", async (req , res) => {
   try {
     const newUser = new User(req.body); // ✅ convert body to mongoose model
+    await newUser.save();               // ✅ save to MongoDB
+
+    res.status(201).json({
+      message: "User data has been saved",
+      user: newUser
+    });
+  } catch (err) {
+    res.status(500).json({ message: "❌ Failed to save user", error: err.message });
+  }
+});
+
+app.post("/api/userdata", async (req , res) => {
+  try {
+    const newUser = new Userdata(req.body); // ✅ convert body to mongoose model
     await newUser.save();               // ✅ save to MongoDB
 
     res.status(201).json({
