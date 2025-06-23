@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },         // name like "Rohan"
     pickup: { type: String, required: true },       // pickup location
     destination: { type: String, required: true },  // destination location
-    number: { type: number, required: true },       // mobile number (you can also use Number)
+    number: { type: Number, required: true },       // mobile number (you can also use Number)
     time: { type: String, required: true },         // time as string like "10:30 AM"
     date: { type: Date, required: true },           // use Date here for real dates
 }, { timestamps: true });
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 const userSchema2 = new mongoose.Schema({
     name: { type: String, required: true },         // name like "Rohan"
     email: { type: String, required: true },       // pickup location
-    number: { type: number, required: true },  // destination location
+    number: { type: Number, required: true },  // destination location
     password: { type: String, required: true },       // mobile number (you can also use Number)
 }, { timestamps: true });
 
