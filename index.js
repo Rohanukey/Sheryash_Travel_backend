@@ -46,6 +46,25 @@ const Userdata = mongoose.model("Userdata", userSchema2);
 app.get("/", (req, res) => {
     res.send("hello from the server you created")
 })
+// backend/index.js
+app.get("/api/users", async (req, res) => {
+    try {
+        const data = await User.find(); // MongoDB example
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch" });
+    }
+});
+app.get("/api/userdata", async (req, res) => {
+    try {
+        const data = await Userdata.find(); // MongoDB example
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch" });
+    }
+});
+
+
 
 // Post user data 
 app.post("/api/users", async (req , res) => {
